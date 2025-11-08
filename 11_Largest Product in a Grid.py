@@ -2,9 +2,9 @@ grid = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 49 49 99 40 
 grid_list = [int(x) for x in grid.split()]
 adjacent_products = []
 #horizontals
-for i in range(int(len(grid_list) / 4)):
-	base_index = i * 4 - 4
-	if base_index + 3 >= len(grid_list):
+for i in range(len(grid_list)):
+	base_index = i
+	if base_index + 3 >= len(grid_list) or (20 - (base_index%20)) > 3:
 		break
 	adjacent_products.append(grid_list[base_index] * grid_list[base_index + 1] * grid_list[base_index + 2] * grid_list[base_index + 3])
 
