@@ -99,7 +99,7 @@ text67 = """59
 30 11 85 31 34 71 13 48 05 14 44 03 19 67 23 73 19 57 06 90 94 72 57 69 81 62 59 68 88 57 55 69 49 13 07 87 97 80 89 05 71 05 05 26 38 40 16 62 45 99 18 38 98 24 21 26 62 74 69 04 85 57 77 35 58 67 91 79 79 57 86 28 66 34 72 51 76 78 36 95 63 90 08 78 47 63 45 31 22 70 52 48 79 94 15 77 61 67 68
 23 33 44 81 80 92 93 75 94 88 23 61 39 76 22 03 28 94 32 06 49 65 41 34 18 23 08 47 62 60 03 63 33 13 80 52 31 54 73 43 70 26 16 69 57 87 83 31 03 93 70 81 47 95 77 44 29 68 39 51 56 59 63 07 25 70 07 77 43 53 64 03 94 42 95 39 18 01 66 21 16 97 20 50 90 16 70 10 95 69 29 06 25 61 41 26 15 59 63 35"""
 
-text17 = """75
+text18 = """75
 95 64
 17 47 82
 18 35 87 10
@@ -114,10 +114,25 @@ text17 = """75
 91 71 52 38 17 14 91 43 58 50 27 29 48
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
-triangle = text17.splitlines()
+text_test = """3
+7 4
+2 4 6
+8 5 9 3"""
+triangle = text67.splitlines()
 triangle_size = len(triangle)
-solved_triangle = [[[] for x in range(y)] for y in range(triangle_size)] 
-def solve_for():
-	for i in range(triangle_size):
-		for j in range(len(triangle[triangle_size - (i + 1)])):
-			solved_triangle[triangle_size - (i + 1)][]
+final_triangle = list(reversed([x.split() for x in triangle]))
+for i in range(len(final_triangle)):
+	final_triangle[i] = list(map(int, final_triangle[i]))
+def make_best_path(final_triangle):
+	for layer_index in range(len(final_triangle)):
+		if layer_index== 0:
+			continue
+		for item_index in range(len(final_triangle[layer_index])):
+			zero_number_path = final_triangle[layer_index-1][item_index]
+			one_number_path = final_triangle[layer_index-1][item_index + 1]
+			zero_path_better = zero_number_path > one_number_path
+			final_triangle[layer_index][item_index] += zero_number_path if zero_path_better else one_number_path
+
+	return list(reversed(final_triangle))[0][0]
+
+print(make_best_path(final_triangle))
